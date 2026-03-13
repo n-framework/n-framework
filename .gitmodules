@@ -1,0 +1,3 @@
+[submodule "src/nfw"]
+	path = src/nfw
+	url = git@github.com:n-framework/nfw.git
