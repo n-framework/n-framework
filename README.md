@@ -1,5 +1,8 @@
 # NFramework
 
+![GitHub stars](https://img.shields.io/github/stars/n-framework/n-framework?style=social)
+![GitHub forks](https://img.shields.io/github/forks/n-framework/n-framework?style=social)
+
 NFramework is a compile-time-first framework and workspace standard for building clean architecture services.
 
 The product vision is a polyglot ecosystem across .NET, Go, and Rust. The first delivery focus is a .NET-first platform path centered on Native AOT compatibility, source-generated framework behavior, and strong architecture boundaries.
