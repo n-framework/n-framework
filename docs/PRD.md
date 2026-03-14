@@ -77,7 +77,7 @@ NFramework must solve these issues with a unified CLI, compile-time code generat
 - Source-generated DI registration and Minimal API route generation for .NET services.
 - Framework-native CQRS execution with commands, queries, events, stream requests, and behaviors for .NET.
 - Topic-specific abstractions used across the codebase, with infrastructure adapters for popular libraries and providers.
-- Topic packages and adapters for persistence, security, validation, mapping, logging, exception handling, localization, translation, mailing, SMS, and search.
+- Topic packages and adapters for persistence, security, validation, mapping, logging, exception handling, localization, translation, mailing, and search.
 - Single-command build and single-command test workflows for generated solutions.
 - Documentation sufficient for a new team to create, run, and extend a .NET service.
 
@@ -341,7 +341,7 @@ NFramework must solve these issues with a unified CLI, compile-time code generat
 **Acceptance Criteria:**
 
 - [ ] NFramework exposes abstractions for JWT authentication, refresh tokens, authorization checks, operation claims, and authenticators.
-- [ ] The `.NET` service path supports authenticator workflows for email, SMS, and OTP through abstractions and adapters.
+- [ ] The `.NET` service path supports authenticator workflows for email and OTP through abstractions and adapters.
 - [ ] Generated services can mark operations as secured and receive consistent API security wiring.
 - [ ] Tests cover login, token refresh, permission evaluation, and authenticator verification.
 
@@ -351,7 +351,7 @@ NFramework must solve these issues with a unified CLI, compile-time code generat
 
 **Acceptance Criteria:**
 
-- [ ] NFramework provides abstractions plus initial adapters for validation, mapping, logging, problem details, localization, translation, mailing, SMS, and search.
+- [ ] NFramework provides abstractions plus initial adapters for validation, mapping, logging, problem details, localization, translation, mailing, and search.
 - [ ] Library-specific types remain isolated to adapters and infrastructure projects.
 - [ ] Tests exist for at least one adapter in each supported topic area.
 - [ ] Generated documentation explains how each abstraction is intended to be used.
@@ -394,14 +394,14 @@ NFramework must solve these issues with a unified CLI, compile-time code generat
 - FR-23: The framework must provide abstract repository contracts with CRUD, paging, dynamic querying, bulk operations, migration application hooks, and documented concurrency expectations.
 - FR-24: The `.NET` service path must include at least one persistence adapter that implements the repository abstractions on top of a popular data access library.
 - FR-25: The framework must provide security abstractions for authentication, refresh tokens, authorization, operation claims, and authenticator workflows.
-- FR-26: The `.NET` service path must support JWT authentication, refresh token workflows, authorization checks, and authenticator flows for email, SMS, and OTP through abstractions and adapters.
+- FR-26: The `.NET` service path must support JWT authentication, refresh token workflows, authorization checks, and authenticator flows for email and OTP through abstractions and adapters.
 - FR-27: Generated or framework-provided API integrations must support secured operations and Swagger or OpenAPI security wiring for the `.NET` service path.
 - FR-28: The framework must provide validation abstractions and at least one adapter for a popular validation library.
 - FR-29: The framework must provide mapping abstractions and at least one adapter for a popular object mapper.
 - FR-30: The framework must provide logging abstractions and at least one adapter for a popular structured logging library.
 - FR-31: The `.NET` HTTP stack must provide exception handling and Problem Details style responses through framework-provided middleware or equivalent integration.
 - FR-32: The framework must provide localization abstractions, request-locale integration for HTTP services, and adapters for resource-based and translation-based localization workflows.
-- FR-33: The framework must provide mail and SMS abstractions plus adapter points for provider implementations.
+- FR-33: The framework must provide mail abstractions plus adapter points for provider implementations.
 - FR-34: The framework must provide search abstractions plus at least one adapter for a popular search engine.
 - FR-35: `nfw check` must perform architecture validation and fail fast on boundary violations.
 - FR-36: Generated samples must build with one documented command and run tests with one documented command.
@@ -442,7 +442,15 @@ NFramework must solve these issues with a unified CLI, compile-time code generat
 ## 11. Technical Considerations
 
 - The initial runtime target is .NET 11, with C# 14/15 features used where they improve clarity, code generation, or AOT compatibility.
-- The CLI implementation language is still a product decision between Go and Native AOT C#; both are acceptable if startup time remains near-instant.
+- The CLI implementation language will be Native AOT C# for the first public release, ensuring a single language stack across the framework and generated services.
+- Dapr support will be optional but first-class, with adapter-based abstractions for teams that choose distributed capabilities.
+- First-class abstractions in the initial beta: CQRS/Mediator, Persistence, Security, Validation, Logging, Exception Handling, and Mapper. Topics shipping shortly after beta: Localization, Mailing, and Search.
+- First-party adapter support in initial beta: EF Core (persistence), FluentValidation (validation), Mapster or manual mapping (object mapping), and Serilog (logging).
+- Entity generation is split: `nfw add entity` creates the entity class only; `nfw add crud` generates full CRUD scaffolding (DTOs, commands, queries, handlers, repository contracts, endpoints, unit tests) for an existing entity.
+- `nfw templates` supports official remote template catalogs from the first public release.
+- Beta delivers .NET-focused implementation with documented workspace/architectural standards. Polyglot support (Go, Rust scaffolding, Protobuf sync) is post-beta.
+- Official performance KPIs are measured in a container environment (e.g., Docker container with 2 CPU, 4GB RAM).
+- Authentication in beta focuses on JWT Auth with refresh tokens; Keycloak integration support is planned for post-beta.
 - Template discovery, template versioning, and template installation rules should be deterministic so generated workspaces are reproducible.
 - Source generators and analyzers will likely be required together: generators to create code, analyzers to enforce rules and emit diagnostics.
 - Native AOT and trimming compatibility must be validated continuously in CI rather than assumed from design alone.
@@ -469,15 +477,3 @@ NFramework must solve these issues with a unified CLI, compile-time code generat
 Delivery sequencing, milestones, and phase boundaries are maintained in [ROADMAP.md](./ROADMAP.md).
 
 The PRD defines product scope, requirements, success metrics, and open questions. The roadmap owns the phased rollout plan.
-
-## 14. Open Questions
-
-- Should the CLI be implemented in Go or Native AOT C# for the first public release?
-- Is Dapr mandatory in all generated distributed solutions, or optional but first-class?
-- Which topics require first-class NFramework abstractions in the initial beta, and which should remain simple integrations?
-- Which popular libraries should receive first-party adapter support in the initial beta?
-- Which of the remaining `.NET` integration topics, if any, are acceptable to ship shortly after beta rather than inside the first beta cut?
-- Should `nfw add entity` also generate migrations, test fixtures, and sample seed data, or stop at code scaffolding?
-- Should `nfw templates` be limited to built-in templates at first, or support remote template catalogs from the first public release?
-- What is the exact boundary between the beta promise and post-beta polyglot support for Go and Rust?
-- Which benchmark environment defines the official startup-time and CLI-speed KPIs?
