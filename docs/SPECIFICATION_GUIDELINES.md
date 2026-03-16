@@ -28,7 +28,7 @@ Rule: orchestrator specs should avoid duplicating full module specs. Prefer link
 
 ### 2. Module Specs (within a module repo): `<module>/specs/<id>-<slug>/`
 
-Purpose: define the module’s behavior, architecture, contracts, and testable acceptance criteria.
+Purpose: define the module's behavior, architecture, contracts, and testable acceptance criteria.
 
 Example:
 
@@ -46,32 +46,166 @@ Rule: implementation decisions (project structure, commands, exit codes, interfa
 
 Minimum sections (module specs and orchestrator specs can be lighter or heavier, but must be testable):
 
-- Context: why we are doing this and what it changes
-- Goals and non-goals (explicit out-of-scope)
-- Functional requirements: behaviors, inputs/outputs, CLI UX, error handling
-- Non-functional requirements: measurable targets (avoid vague words like "fast" or "robust" without numbers)
+- **Header metadata**: feature branch, spec type, project, status, input description
+- User Scenarios & Testing: user stories with priorities, rationale, independent tests, and acceptance scenarios (Given/When/Then format)
+- Requirements: functional requirements (FR-XXX numbered) and any key entities
+- Success Criteria: measurable outcomes (SC-XXX numbered)
+- Assumptions: what we're taking as given
+- Dependencies: what this spec depends on
+- Clarifications: Q&A from specification sessions (optional but recommended)
+- Non-goals: explicit out-of-scope items
 - Edge cases: invalid input, partial failures, offline modes, cancellation (Ctrl+C), etc.
-- Acceptance criteria: how we verify the feature is complete (commands/tests/exit codes)
 
 ## Template (Module Spec)
 
 ```markdown
-# <id>-<slug>
+# Feature Specification: <Title>
 
-## Context
+**Feature Branch**: `<id>-<slug>`
+**Spec Type**: Project-Based
+**Project**: <project-name>
+**Created**: YYYY-MM-DD
+**Status**: Draft | In Review | Approved | Implemented
+**Input**: User description: "<one-line summary from user input>"
 
-## Goals
+> **Note**: This spec is organized as project-based. See `.specify/SPEC_ORGANIZATION.md` for details on spec organization types.
 
-## Non-Goals
+## User Scenarios & Testing _(mandatory)_
 
-## Functional Requirements
+### User Story 1 - <Title> (Priority: P1)
 
-## Non-Functional Requirements
+As a <user type>, I want to <action> so I can <benefit>.
+
+**Why this priority**: <rationale for priority level>
+
+**Independent Test**: <how this can be tested independently, what value it delivers>
+
+**Acceptance Scenarios**:
+
+1. **Given** <precondition>, **When** <action>, **Then** <expected outcome>
+2. **Given** <precondition>, **When** <action>, **Then** <expected outcome>
+
+---
+
+### User Story 2 - <Title> (Priority: P2)
+
+<same structure as User Story 1>
+
+---
 
 ## Edge Cases
 
-## Acceptance Criteria
+- **<Case name>**: <description of edge case behavior>
+- **No arguments**: When <command> is run with no arguments...
+- **Invalid command**: When an unknown command is entered...
+- **Interrupt signal**: When the user sends Ctrl+C...
+
+## Requirements _(mandatory)_
+
+### Functional Requirements
+
+- **FR-001**: <requirement text - MUST/SHOULD/MAY language>
+- **FR-002**: <requirement text>
+- **FR-003**: <requirement text>
+
+### Key Entities
+
+- **<Entity 1>**: <definition/description>
+- **<Entity 2>**: <definition/description>
+
+## Success Criteria _(mandatory)_
+
+### Measurable Outcomes
+
+- **SC-001**: <measurable outcome with numbers/timeframes>
+- **SC-002**: <measurable outcome>
+- **SC-003**: <measurable outcome>
+
+## Assumptions
+
+- <assumption 1>
+- <assumption 2>
+- <assumption 3>
+
+## Dependencies
+
+- <dependency 1>
+- <dependency 2>
+
+## Clarifications
+
+### Session YYYY-MM-DD
+
+- Q: <question>? → A: <answer>
+- Q: <question>? → A: <answer>
+
+### Session YYYY-MM-DD
+
+- Q: <question>? → A: <answer>
+
+## Non-Goals
+
+- <non-goal 1>
+- <non-goal 2>
+- <non-goal 3>
 ```
+
+## Writing Good User Stories
+
+Each user story should include:
+
+- **Priority level** (P1, P2, P3, etc.): P1 indicates the most critical user journeys
+- **"Why this priority"**: Rationale explaining why this story has its assigned priority
+- **"Independent Test"**: How this can be tested independently and what value it delivers
+- **Acceptance Scenarios**: Given/When/Then format describing concrete test cases
+
+### Priority Guidelines
+
+- **P1**: Critical user journeys - without these, users cannot effectively use the feature
+- **P2**: Important but not blocking - standard expectations that enable proper workflows
+- **P3**: Nice-to-have or can be minimally implemented - can start empty or with basic functionality
+
+### Given/When/Then Format
+
+```
+**Given** <precondition - the starting state>,
+**When** <action - what the user does>,
+**Then** <expected outcome - what should happen>
+```
+
+Example:
+
+```
+**Given** the nfw CLI is installed,
+**When** I run `nfw --help`,
+**Then** I see a help screen displaying available commands and usage information
+```
+
+## Numbering Requirements
+
+Use consistent prefixes for numbered items:
+
+- **FR-001, FR-002, ...**: Functional Requirements
+- **SC-001, SC-002, ...**: Success Criteria
+- **NFR-001, NFR-002, ...**: Non-Functional Requirements (if needed)
+
+Use MUST/SHOULD/MAY language in requirements:
+
+- **MUST**: Absolute requirement
+- **SHOULD**: Recommended but may have valid reasons to bypass
+- **MAY**: Optional feature
+
+## Edge Cases to Consider
+
+Common edge cases to address in specs:
+
+- **No arguments**: Behavior when invoked without required inputs
+- **Invalid input**: Handling of malformed or unexpected input
+- **Missing configuration**: What happens when required config is absent
+- **Permission errors**: Behavior without filesystem/network access
+- **Network failures**: Offline mode or unreachable services
+- **Interrupt signals**: Clean shutdown on Ctrl+C/SIGINT
+- **Conflicting options**: When mutually exclusive flags are combined
 
 ## Workflow
 
