@@ -2,6 +2,8 @@
 ## .NET Core build folders
 bin/
 obj/
+.config/dotnet-tools.lock
+.config/dotnet-tools.local.json
 
 ## Common node modules locations
 /node_modules
@@ -10,6 +12,7 @@ obj/
 # Agents
 .agents/
 .claude/
+.codex/
 .serena/
 .specify/
 AGENTS.md
