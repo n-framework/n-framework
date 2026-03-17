@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repo follows spec-driven development: write a testable spec first, then plan/design, then break work into executable tasks.
+This repo follows spec-driven development: write a testable spec first, then plan the orchestrator view, then break work into the next required specification topics.
 Specs exist to reduce ambiguity, keep architecture intentional, and make change reviewable.
 
 ## Repository Model (Meta-Repo + Submodules)
@@ -21,10 +21,12 @@ Purpose: track meta-repo work needed to consume changes from module repositories
 Typical contents:
 
 - `specs/<id>-<slug>/spec.md`: what changes must land in submodules and what this meta-repo must do to consume them
-- `specs/<id>-<slug>/plan.md`: high-level integration plan (submodule pinning, validation commands, release steps)
-- `specs/<id>-<slug>/tasks.md`: short checklist of meta-repo tasks
+- `specs/<id>-<slug>/plan.md`: high-level orchestration plan (module split, validation expectations, downstream spec map)
+- `specs/<id>-<slug>/tasks.md`: short checklist of which project-level spec topics must exist next
 
-Rule: orchestrator specs should avoid duplicating full module specs. Prefer linking to the canonical module spec.
+Rule: orchestrator specs should avoid duplicating full module specs. Prefer linking to or naming the canonical module spec topics.
+
+Additional rule for orchestrator `tasks.md`: it should define the downstream project spec topics and the input text to use for those specs. It should not expand into project implementation tasks.
 
 ### 2. Module Specs (within a module repo): `<module>/specs/<id>-<slug>/`
 
@@ -39,6 +41,7 @@ Rule: implementation decisions (project structure, commands, exit codes, interfa
 ## Naming and Consistency Rules
 
 - Spec directory name: `<id>-<slug>` where `<id>` is a 3-digit sequence (e.g., `001`) and `<slug>` is kebab-case.
+- **Use descriptive slugs**: Name specs by what they deliver (e.g., `workspace-scaffolding`, `cli-skeleton`) rather than phase numbers (avoid `phase1-*`).
 - Avoid external project references inside specs. Specs should describe N-Framework behavior and constraints only.
 - For .NET modules, keep project/folder naming consistent with the `NFramework.NFW.*` conventions (for example `NFramework.NFW.CLI`).
 
@@ -55,6 +58,14 @@ Minimum sections (module specs and orchestrator specs can be lighter or heavier,
 - Clarifications: Q&A from specification sessions (optional but recommended)
 - Non-goals: explicit out-of-scope items
 - Edge cases: invalid input, partial failures, offline modes, cancellation (Ctrl+C), etc.
+
+For orchestrator specs, keep the artifact set minimal unless a stronger need exists:
+
+- `spec.md`
+- `plan.md`
+- `tasks.md`
+
+Do not create extra design documents such as `research.md`, `data-model.md`, `contracts/`, or `quickstart.md` unless the orchestrator spec truly needs them to coordinate multiple module repositories. The default is to keep root specs lean and push detail into the module specs.
 
 ## Template (Module Spec)
 
@@ -209,8 +220,20 @@ Common edge cases to address in specs:
 
 ## Workflow
 
-1. Write or update the module spec in the module repo.
-2. Implement via a PR against the module repo default branch.
-3. Add/maintain an orchestrator spec in this meta-repo if the change requires submodule pinning or cross-module integration.
-4. Update the submodule pointer in the meta-repo after the module PR is merged.
-5. Verify using the acceptance criteria commands described in the orchestrator spec.
+1. Write or update the orchestrator spec in this meta-repo when the change spans multiple module repositories or needs root-level coordination.
+2. Use the orchestrator `tasks.md` to define which project-level spec topics must be created next and include the exact input text for each one.
+3. Create those project-level specs in the relevant module repositories.
+4. Implement via PRs against the module repo default branches.
+5. Update the submodule pointers in the meta-repo after the module PRs are merged.
+6. Verify using the acceptance criteria and validation steps described in the orchestrator spec.
+
+## Orchestrator Task Writing
+
+When writing `specs/<id>-<slug>/tasks.md` for a meta-repo spec:
+
+- Organize tasks by user story or milestone.
+- Each task should identify the target project spec path.
+- Each task should include the exact input text that should be used to create that project-level spec.
+- **Task format**: Use the pattern `- [ ] T### <action> spec topic in <path> with input: <input text>` for consistency.
+- Do not write project implementation tasks in the root orchestrator `tasks.md`.
+- Do not restate code-level file edits, tests, or service registrations there; those belong in the downstream project specs and their own planning artifacts.
