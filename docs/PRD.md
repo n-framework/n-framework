@@ -102,8 +102,9 @@ NFramework must solve these issues with a unified CLI, compile-time code generat
 **Acceptance Criteria:**
 
 - [ ] `nfw templates` lists available starter templates with identifiers and descriptions.
-- [ ] `nfw new <workspace-name>` creates a workspace root with the expected folders, solution files, and baseline configuration.
-- [ ] `nfw new <workspace-name> --template <id>` selects a starter template without requiring interactive input.
+- [ ] `nfw new [workspace-name]` creates a workspace root with the expected folders, solution files, and baseline configuration.
+- [ ] In an interactive terminal, `nfw new` prompts for any missing required input before generation starts.
+- [ ] `nfw new [workspace-name] --template <id> --no-input` selects a starter template without requiring interactive input.
 - [ ] The generated workspace can be built with one documented command.
 - [ ] The generated workspace test suite can be run with one documented command.
 - [ ] A CLI smoke test verifies the generated structure and template selection workflow.
@@ -371,7 +372,7 @@ NFramework must solve these issues with a unified CLI, compile-time code generat
 
 - FR-1: The system must provide an `nfw` CLI as the primary entry point for workspace and service lifecycle operations.
 - FR-2: `nfw templates` must list available starter templates with stable identifiers and descriptions.
-- FR-3: `nfw new <workspace-name> [--template <id>]` must create a valid NFramework workspace with baseline configuration, documentation, and buildable starter assets.
+- FR-3: `nfw new [workspace-name] [--template <id>] [--no-input]` must create a valid NFramework workspace with baseline configuration, documentation, and buildable starter assets, prompting for missing required input only when the terminal is interactive.
 - FR-4: `nfw add service <name> --lang dotnet` must generate a `.NET` service with `Domain`, `Application`, `Infrastructure`, and `Api` layers.
 - FR-5: The CLI must support both interactive and non-interactive workflows for the core generation commands.
 - FR-6: The CLI must validate command arguments and return actionable errors for unsupported languages, invalid identifiers, malformed property declarations, and invalid option combinations.
