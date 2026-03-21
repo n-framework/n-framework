@@ -1,0 +1,9 @@
+node_modules/
+bin/
+obj/
+coverage/
+.agents/
+.claude/
+.codex/
+.serena/
+.specify/

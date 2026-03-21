@@ -17,3 +17,12 @@ obj/
 .specify/
 AGENTS.md
 CLAUDE.md
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+.log/

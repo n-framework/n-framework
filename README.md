@@ -17,6 +17,24 @@ This repository is currently in the planning and specification stage.
 - The framework, CLI, and adapters described below are planned capabilities, not yet a released implementation.
 - The initial beta target is .NET-first.
 
+## 🛠 Developer Commands
+
+The active `nfw` CLI implementation lives in [`src/nfw`](src/nfw).
+
+Run the repository-root wrappers to validate the CLI from the top-level checkout:
+
+```bash
+./scripts/build.sh
+./scripts/test.sh
+```
+
+Inside `src/nfw`, the feature currently exposes:
+
+```bash
+dotnet run --project src/nfw/src/NFramework.NFW/presentation/NFramework.NFW.CLI/NFramework.NFW.CLI.csproj -- templates
+dotnet run --project src/nfw/src/NFramework.NFW/presentation/NFramework.NFW.CLI/NFramework.NFW.CLI.csproj -- new sample --template blank
+```
+
 ---
 
 ## ❓ Why NFramework
