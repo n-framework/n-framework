@@ -7,7 +7,7 @@ root = true
 #### Core EditorConfig Options ####
 
 # New line preferences
-end_of_line = crlf
+end_of_line = lf
 
 #### .NET Coding Conventions ####
 
