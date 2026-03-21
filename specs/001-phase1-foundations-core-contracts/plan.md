@@ -1,6 +1,6 @@
-# Implementation Plan: Workspace and Service Scaffolding
+# Implementation Plan: Phase 1 Foundations and Core Contracts
 
-**Branch**: `001-workspace-scaffolding` | **Date**: 2026-03-16 | **Spec**: [`spec.md`](./spec.md)
+**Branch**: `001-phase1-foundations-core-contracts` | **Date**: 2026-03-16 | **Spec**: [`spec.md`](./spec.md)
 **Spec Type**: Monorepo
 **Project**: N/A
 **Input**: Feature specification from [`spec.md`](./spec.md)
@@ -23,7 +23,7 @@ Initial establishes the first usable NFramework path for standalone services. Th
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Initial design.*
+_GATE: Must pass before Phase 0 research. Re-check after Initial design._
 
 ### Pre-Research Gate Review
 
@@ -38,7 +38,7 @@ Initial establishes the first usable NFramework path for standalone services. Th
 ### Documentation (this feature)
 
 ```text
-specs/001-phase1-root-spec/
+specs/001-phase1-foundations-core-contracts/
 ├── spec.md
 ├── plan.md
 └── tasks.md
@@ -60,7 +60,7 @@ scripts/
 └── lint.sh
 
 specs/
-└── 001-phase1-root-spec/
+└── 001-phase1-foundations-core-contracts/
 
 src/
 ├── nfw/                      # existing CLI/workspace module submodule

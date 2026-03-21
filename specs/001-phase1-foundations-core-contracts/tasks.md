@@ -1,8 +1,8 @@
-# Tasks: Workspace and Service Scaffolding
+# Tasks: Phase 1 Foundations and Core Contracts
 
 **Spec Type**: Monorepo
 **Project**: N/A
-**Input**: Project-spec topics from [`specs/001-workspace-scaffolding/`](./)
+**Input**: Project-spec topics from [`specs/001-phase1-foundations-core-contracts/`](./)
 **Prerequisites**: plan.md, spec.md
 
 **Tests**: Not included here. This task list only defines which Initial project-level spec topics should be created next.

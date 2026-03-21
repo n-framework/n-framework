@@ -1,6 +1,6 @@
-# Feature Specification: Workspace and Service Scaffolding
+# Feature Specification: Phase 1 Foundations and Core Contracts
 
-**Feature Branch**: `001-workspace-scaffolding`
+**Feature Branch**: `001-phase1-foundations-core-contracts`
 **Spec Type**: Monorepo
 **Project**: N/A
 **Created**: 2026-03-16
@@ -22,7 +22,7 @@ As a platform engineer, I want to list available starter templates and create a 
 **Acceptance Scenarios**:
 
 1. **Given** the `nfw` CLI is available, **When** a user runs the template listing command, **Then** the user sees each available template with a stable identifier and short description.
-2. **Given** an interactive terminal and more than one available template, **When** a user creates a workspace without specifying a template identifier, **Then** the user is prompted to choose a template and the selected workspace is created successfully.
+2. **Given** an interactive terminal and more than one available template, **When** a user creates a workspace without specifying all required inputs, **Then** the user is prompted for the missing values, including template choice, and the selected workspace is created successfully.
 3. **Given** a non-interactive environment, **When** a user creates a workspace with an explicit template identifier, **Then** the workspace is created without prompting for additional input.
 4. **Given** a freshly created workspace, **When** the user opens its starter documentation, **Then** the user can find one documented build command and one documented test command for the generated workspace.
 
@@ -78,6 +78,7 @@ As a tech lead, I want Initial workspaces to make the intended layer responsibil
 ### Edge Cases
 
 - **No template identifier in non-interactive mode**: When a workspace is created outside an interactive terminal without an explicit template identifier and multiple templates are available, the command returns an actionable error listing valid template identifiers instead of blocking for input.
+- **Missing required input with prompts disabled**: When a user runs workspace creation with `--no-input` and omits a required value such as the workspace name or template identifier, the command fails immediately with corrective guidance instead of prompting.
 - **Unknown template identifier**: When a user requests a template that does not exist, the command fails without creating a partial workspace and explains how to list valid templates.
 - **Existing target directory**: When the requested workspace name already exists or the destination is not empty, creation is refused unless the workflow explicitly supports safe reuse.
 - **Duplicate service name**: When a user adds a service whose name already exists in the workspace, the command fails with a clear remediation path and does not overwrite the existing service.
@@ -92,7 +93,7 @@ As a tech lead, I want Initial workspaces to make the intended layer responsibil
 
 - **FR-001**: The system MUST provide a root Initial workflow that lets users discover templates, create a workspace, and scaffold a standalone service without manual project bootstrapping.
 - **FR-002**: The template listing workflow MUST present each available starter template with a stable identifier and a concise description that supports deterministic selection.
-- **FR-003**: Workspace creation MUST support both interactive template selection and non-interactive template selection through an explicit template identifier.
+- **FR-003**: Workspace creation MUST support interactive prompting for missing required input in real terminals and non-interactive execution through explicit arguments and options, including an opt-out switch for prompts.
 - **FR-004**: A newly created workspace MUST include starter documentation that tells users which single command builds the workspace and which single command runs its test suite.
 - **FR-005**: The service scaffolding workflow MUST create the standard four-layer structure consisting of `Domain`, `Application`, `Infrastructure`, and `Api`, plus a starter health or readiness endpoint for first-run verification.
 - **FR-006**: Generated Initial services MUST compile and pass their baseline tests immediately after generation without requiring manual edits to generated assets.
