@@ -1,23 +1,28 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+# shellcheck source=./scripts/common.sh
+source "${SCRIPT_DIR}/common.sh"
 
-cd "$ROOT_DIR"
+init_environment
+
+cd "$REPO_ROOT"
 
 echo "📦 Checking for outdated dependencies..."
 
-# Check for solutions first
-for sln in $(find . -name "*.sln" -type f); do
-	echo -e "\n  📋 Checking $sln..."
-	dotnet dotnet-outdated "$sln"
-done
-
-# If no solutions, check projects
-if [[ -z $(find . -name "*.sln" -type f) ]]; then
-	echo "📦 No solutions found, checking projects..."
-	for csproj in $(find . -name "*.csproj" -type f); do
-		echo -e "\n  📋 Checking $csproj..."
-		dotnet dotnet-outdated "$csproj"
-	done
+# Check solutions (.slnx)
+if [[ -n $(find . -name "*.slnx" -type f -print0) ]]; then
+  find . -name "*.slnx" -type f -print0 | while IFS= read -r -d '' slnx; do
+    echo -e "\n  📋 Checking $(basename "$slnx")..."
+    dotnet dotnet-outdated "$slnx"
+  done
+else
+  echo "📦 No solutions found, checking projects..."
+  # Check projects (.csproj)
+  find . -name "*.csproj" -type f -print0 | while IFS= read -r -d '' csproj; do
+    echo -e "\n  📋 Checking $(basename "$csproj")..."
+    dotnet dotnet-outdated "$csproj"
+  done
 fi

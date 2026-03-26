@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(cd "${script_dir}/.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+# shellcheck source=./scripts/common.sh
+source "${SCRIPT_DIR}/common.sh"
 
-cd "${repo_root}"
+init_environment
 
 echo "🔨 Building project..."
-make -C src/nfw build
+make -C "${REPO_ROOT}/src/nfw" build
 
 echo "✅ Build complete!"
