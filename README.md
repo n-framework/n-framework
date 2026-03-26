@@ -1,39 +1,61 @@
 # NFramework
 
-![GitHub stars](https://img.shields.io/github/stars/n-framework/n-framework?style=social)
-![GitHub forks](https://img.shields.io/github/forks/n-framework/n-framework?style=social)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/n-framework/n-framework?style=social)](https://github.com/n-framework/n-framework/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/n-framework/n-framework?style=social)](https://github.com/n-framework/n-framework/network/members)
+[![GitHub contributors](https://img.shields.io/github/contributors/n-framework/n-framework)](https://github.com/n-framework/n-framework/graphs/contributors)
+[![GitHub issues](https://img.shields.io/github/issues/n-framework/n-framework)](https://github.com/n-framework/n-framework/issues)
+[![Buy A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black&style=flat)](https://ahmetcetinkaya.me/donate)
 
-NFramework is a compile-time-first framework and workspace standard for building clean architecture services.
-
-The product vision is a polyglot ecosystem across .NET, Go, and Rust. The first delivery focus is a .NET-first platform path centered on Native AOT compatibility, source-generated framework behavior, and strong architecture boundaries.
+A compile-time-first application framework and workspace standard for building **clean architecture services**. The first delivery focus is a .NET-first platform centered on Native AOT compatibility, source-generated framework behavior, and strong architecture boundaries.
 
 ---
 
 ## 📋 Status
 
-This repository is currently in the planning and specification stage.
+This repository is currently in the **planning and specification stage**.
 
 - The primary source of truth is [docs/PRD.md](docs/PRD.md).
 - The framework, CLI, and adapters described below are planned capabilities, not yet a released implementation.
 - The initial beta target is .NET-first.
 
-## 🛠 Developer Commands
+---
 
-The active `nfw` CLI implementation lives in [`src/nfw`](src/nfw).
+## 🚀 Quick Start
 
-Run the repository-root wrappers to validate the CLI from the top-level checkout:
-
-```bash
-./scripts/build.sh
-./scripts/test.sh
-```
-
-Inside `src/nfw`, the feature currently exposes:
+### Installation
 
 ```bash
+# Clone and initialize
+git clone https://github.com/n-framework/n-framework.git
+cd n-framework
+make build
+
+# Run the CLI
 dotnet run --project src/nfw/src/NFramework.NFW/presentation/NFramework.NFW.CLI/NFramework.NFW.CLI.csproj -- templates
-dotnet run --project src/nfw/src/NFramework.NFW/presentation/NFramework.NFW.CLI/NFramework.NFW.CLI.csproj -- new sample --template blank
 ```
+
+### Basic Usage
+
+```bash
+# List available templates
+nfw templates
+
+# Create a new workspace from a template
+nfw new my-workspace
+
+# Add a service scaffold
+nfw add service orders --lang dotnet
+
+# Validate architecture boundaries
+nfw check
+```
+
+---
+
+## 🛠 Contributing
+
+For development setup, build/test commands, code style, and contribution guidelines, see **[docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)**.
 
 ---
 
@@ -55,6 +77,16 @@ NFramework is intended to solve that with one opinionated system:
 - Topic-specific abstractions with replaceable infrastructure adapters
 - CLI-driven scaffolding and validation
 - Cloud-native defaults through Aspire and Dapr after the standalone .NET path is stable
+
+---
+
+## 📚 Documentation
+
+- [PRD.md](docs/PRD.md) — Product requirements, user stories, acceptance criteria
+- [ROADMAP.md](docs/ROADMAP.md) — Delivery planning and phase boundaries
+- [PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md) — Repository layout and module organization
+- [CONTRIBUTING.md](docs/CONTRIBUTING.md) — Development setup, build commands, and contribution guidelines
+- [SPECIFICATION_GUIDELINES.md](docs/SPECIFICATION_GUIDELINES.md) — Spec-driven development workflow
 
 ---
 
@@ -82,95 +114,52 @@ The long-term goal is one workspace model and one architectural standard across 
 
 ---
 
-## 🚀 Planned Capabilities
+## 🛠 Planned Capabilities
 
 ### CLI
 
 The planned `nfw` CLI is the main developer entry point.
 
-Example planned commands:
-
 ```bash
-nfw templates
-nfw new my-workspace
-nfw add service orders --lang dotnet
-nfw add entity Product --props Name:string,Price:decimal
-nfw add command ApproveOrder Orders
-nfw add query GetOrderByNumber Orders
-nfw check
-nfw up
-nfw sync
+nfw templates                                          # List available templates
+nfw new my-workspace                                   # Create from template
+nfw add service orders --lang dotnet                   # Scaffold a service
+nfw add entity Product --props Name:string,Price:decimal  # Generate entity
+nfw add command ApproveOrder Orders                    # Generate command
+nfw add query GetOrderByNumber Orders                  # Generate query
+nfw check                                              # Validate architecture
+nfw up                                                 # Boot local dev environment
+nfw sync                                               # Sync shared contracts
 ```
-
-Planned responsibilities:
-
-- List and select starter templates
-- Create new workspaces
-- Scaffold services by language
-- Generate entities, CRUD flows, standalone commands, and standalone queries
-- Support interactive and non-interactive generation workflows
-- Carry feature options such as caching, logging, transaction, security, and API exposure through generation
-- Validate architecture boundaries
-- Boot local development environments
-- Synchronize shared contracts in the polyglot phase
 
 ### .NET-first Beta Scope
 
-The initial beta is expected to focus on:
-
 - Template-aware `nfw new`, `.NET` service scaffolding, and `nfw check`
-- `nfw add entity`, `nfw add command`, and `nfw add query`
-- .NET service scaffolding
-- `NFramework.Domain` abstractions such as entities, aggregate roots, value objects, and domain events
-- `NFramework.Application` abstractions such as CQRS contracts, result types, business rules, pageable requests, and pipeline markers
-- Framework-native CQRS execution with commands, queries, events, stream requests, and behaviors
-- Abstract repository contracts with paging, dynamic query support, bulk operations, and migration hooks
-- Security contracts for JWT, refresh tokens, operation claims, authorization, and multi-channel authenticators
-- Framework abstractions plus initial adapters for validation, mapping, logging, problem details, localization, translation, mailing, SMS, and search
-- Source-generated DI registration
-- Source-generated Minimal API route mapping
-- Topic-specific abstractions used throughout the codebase, with optional library adapters behind infrastructure boundaries
-- One-command build and one-command test workflows for generated solutions
+- `NFramework.Domain` abstractions: entities, aggregate roots, value objects, domain events
+- `NFramework.Application` abstractions: CQRS contracts, result types, business rules
+- Source-generated DI registration and Minimal API route mapping
+- Framework-native CQRS execution with commands, queries, events, and behaviors
+- Security contracts for JWT, refresh tokens, operation claims, and authorization
+- Topic-specific abstractions with optional library adapters
 
 ### Planned Post-Beta Scope
 
-After the .NET service path is proven, the platform is expected to expand with:
-
-- Additional `.NET` integration packs
 - Aspire AppHost and ServiceDefaults generation
 - Dapr adapters for pub/sub, state management, and secret store
-- Local orchestration for distributed service development
-- Go service scaffolding
-- Rust service scaffolding
-- Shared Protobuf contracts
-- Cross-service communication via gRPC
-- Consistent workspace conventions across languages
+- Go and Rust service scaffolding
+- Shared Protobuf contracts with gRPC cross-service communication
 
 ---
 
 ## ✨ What Makes It Different
 
 - Native AOT and trimming compatibility are treated as product requirements, not an afterthought.
-- Minimal API is the preferred HTTP model for generated .NET services.
 - Architectural enforcement is part of the product through generation and validation, not just documentation.
 - The framework combines first-party abstractions, generators, and adapters in one opinionated system.
-- Dapr and Aspire are first-class platform concerns in the long-term developer workflow, but they come after the standalone `.NET` service path.
+- Dapr and Aspire are first-class platform concerns in the long-term developer workflow.
 
 ---
 
-## 🎯 Current Priorities
+## 📄 License
 
-The documented roadmap is:
-
-1. Foundations and core contracts
-2. Generator and `.NET` service beta
-3. Post-beta `.NET` integrations and distributed features
-4. Polyglot expansion
-
-See [docs/PRD.md](docs/PRD.md) for the detailed scope, acceptance criteria, and success metrics.
-
----
-
-## ⚖️ License
-
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
