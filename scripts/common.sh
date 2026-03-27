@@ -17,7 +17,7 @@ ensure_submodules() {
   # Ensure nested submodules inside nfw are also initialized
   if [ -f "${submodule_dir}/.git" ]; then
     local nested_missing=false
-    for nested in packages/n-framework-core-cli packages/n-framework-core-template packages/nfw-templates; do
+    for nested in packages/core-cli-dotnet packages/core-template-dotnet packages/nfw-templates; do
       if [ ! -f "${submodule_dir}/${nested}/.git" ]; then
         nested_missing=true
         break

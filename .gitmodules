@@ -1,3 +1,12 @@
 [submodule "src/nfw"]
 	path = src/nfw
 	url = git@github.com:n-framework/nfw.git
+[submodule "src/nfw-templates"]
+	path = src/nfw-templates
+	url = git@github.com:n-framework/nfw-templates.git
+[submodule "src/core-template-dotnet"]
+	path = src/core-template-dotnet
+	url = git@github.com:n-framework/core-template-dotnet.git
+[submodule "src/core-cli-dotnet"]
+	path = src/core-cli-dotnet
+	url = git@github.com:n-framework/core-cli-dotnet.git
