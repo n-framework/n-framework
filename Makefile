@@ -24,3 +24,6 @@ lint:
 
 update-submodules:
 	./scripts/update-submodules.sh
+
+run:
+	@cd $(or $(CWD),.) && cargo run --manifest-path $(abspath src/nfw/Cargo.toml) --package n-framework-nfw-cli -- $(ARGS)

@@ -6,6 +6,8 @@ end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+indent_style = space
+indent_size = 4
 
 ## C# files
 [*.cs]
@@ -43,8 +45,8 @@ dotnet_style_object_initializer = true
 dotnet_style_prefer_auto_properties = true
 dotnet_style_prefer_collection_expression = true:warning
 dotnet_style_prefer_compound_assignment = true
-dotnet_style_prefer_conditional_expression_over_assignment = true
-dotnet_style_prefer_conditional_expression_over_return = true
+dotnet_style_prefer_conditional_expression_over_assignment = false
+dotnet_style_prefer_conditional_expression_over_return = false
 dotnet_style_prefer_foreach_explicit_cast_in_source = when_strongly_typed
 dotnet_style_prefer_inferred_anonymous_type_member_names = true
 dotnet_style_prefer_inferred_tuple_names = true
@@ -72,6 +74,8 @@ csharp_style_var_when_type_is_apparent = false:silent
 
 # IDE0028: Use collection initializers
 dotnet_diagnostic.IDE0028.severity = none
+# IDE0046: Use conditional expression for return
+dotnet_diagnostic.IDE0046.severity = none
 # CS1591: Missing XML comment for publicly visible type or member
 dotnet_diagnostic.CS1591.severity = none
 
@@ -103,7 +107,7 @@ csharp_style_prefer_readonly_struct = true:suggestion
 csharp_style_prefer_readonly_struct_member = true:suggestion
 
 # Code-block preferences
-csharp_prefer_braces = false
+csharp_prefer_braces = when_multiline
 csharp_prefer_simple_using_statement = true:suggestion
 csharp_style_namespace_declarations = file_scoped:silent
 csharp_style_prefer_method_group_conversion = true:silent
@@ -222,8 +226,16 @@ dotnet_naming_style.local.required_suffix =
 dotnet_naming_style.local.word_separator =
 dotnet_naming_style.local.capitalization = camel_case
 
-[**/tests/**/*.cs]
+[{tests,src/**/*.Tests}/**/*.cs]
 # CA1707: Identifiers should not contain underscores
 dotnet_diagnostic.CA1707.severity = none
+# CA1873: False positive in Moq Verify extension where It.IsAny is flagged
+dotnet_diagnostic.CA1873.severity = none
+# CA2201: Standard to throw raw Exception when simulating faults in tests
+dotnet_diagnostic.CA2201.severity = none
+# CA1822: Test mock properties often deliberately avoid static modifier for reflection
+dotnet_diagnostic.CA1822.severity = none
+# CA2007: ConfigureAwait(false) is not generally required in xUnit testing context
+dotnet_diagnostic.CA2007.severity = none
 # IDE0058: Expression value is never used
 dotnet_diagnostic.IDE0058.severity = none

@@ -17,6 +17,7 @@ target/
 # Agents
 .agents/
 .claude/
+.codex
 .codex/
 .kilo/
 .opencode/
@@ -24,7 +25,7 @@ target/
 .specify/
 AGENTS.md
 CLAUDE.md
-.codex
+graphify-out/
 
 # Editor and OS noise
 .DS_Store
