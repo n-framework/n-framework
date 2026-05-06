@@ -19,3 +19,6 @@
 [submodule "src/core-mediator-dotnet"]
 	path = src/core-mediator-dotnet
 	url = git@github.com:n-framework/core-mediator-dotnet.git
+[submodule "src/core-persistence-dotnet"]
+	path = src/core-persistence-dotnet
+	url = git@github.com:n-framework/core-persistence-dotnet.git
