@@ -22,3 +22,6 @@
 [submodule "src/core-persistence-dotnet"]
 	path = src/core-persistence-dotnet
 	url = git@github.com:n-framework/core-persistence-dotnet.git
+[submodule "src/core-logging-dotnet"]
+	path = src/core-logging-dotnet
+	url = git@github.com:n-framework/core-logging-dotnet.git
