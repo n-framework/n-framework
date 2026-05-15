@@ -138,6 +138,8 @@ csharp_using_directive_placement = outside_namespace:silent
 # Formatting preferences (note: CSharpier handles most formatting)
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = false
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = none
 
 # Naming rules
 dotnet_naming_rule.interface_should_be_begins_with_i.severity = suggestion
