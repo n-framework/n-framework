@@ -90,7 +90,7 @@ _Maps to_: US3, FR-014, FR-023
 
 ### P3-T005
 
-- [ ] Create spec topic in `src/nfw/specs/` with spec instruction: Implement the `nfw gen endpoint <OPERATION_TYPE> <NAME> <FEATURE>` command that generates HTTP endpoint boilerplate for existing commands or queries; support GET/POST/PUT/DELETE mapping based on operation type; generate Minimal API route definitions with proper attribute routing; support `--secured` flag for authorization; generate OpenAPI documentation annotations; place in API layer following conventions; validate referenced command/query exists; complete in <3 seconds; include integration tests.
+- [x] Create spec topic in `src/nfw/specs/` with spec instruction: Implement the `nfw gen endpoint <OPERATION_TYPE> <NAME> <FEATURE>` command that generates HTTP endpoint boilerplate for existing commands or queries; support GET/POST/PUT/DELETE mapping based on operation type; generate Minimal API route definitions with proper attribute routing; support `--secured` flag for authorization; generate OpenAPI documentation annotations; place in API layer following conventions; validate referenced command/query exists; complete in <3 seconds; include integration tests.
 
 _Maps to_: US3, FR-007, FR-019
 
@@ -120,7 +120,7 @@ _Maps to_: US3, FR-004, FR-012, FR-016, FR-018
 
 ### P3-T011
 
-- [ ] Create spec topic in `src/nfw/specs/` with spec instruction: Implement the `nfw add webapi` command that adds the WebAPI module to an existing service; support interactive prompts for service selection; support `--service` parameter to specify target service and `--no-input` flag for automation; update `nfw.yaml` to register the webapi module; execute template rendering for API layer artifacts including Minimal API startup configuration, route registration extensions, CORS middleware, health check endpoints, and problem details middleware; generate OpenAPI/Swagger configuration; preserve YAML comments on rollback; complete in <5 seconds; include integration tests covering successful addition, rollback on failure, service validation, and YAML comment preservation.
+- [x] Create spec topic in `src/nfw/specs/` with spec instruction: Implement the `nfw add webapi` command that adds the WebAPI module to an existing service; support interactive prompts for service selection; support `--service` parameter to specify target service and `--no-input` flag for automation; update `nfw.yaml` to register the webapi module; execute template rendering for API layer artifacts including Minimal API startup configuration, route registration extensions, CORS middleware, health check endpoints, and problem details middleware; generate OpenAPI/Swagger configuration; preserve YAML comments on rollback; complete in <5 seconds; include integration tests covering successful addition, rollback on failure, service validation, and YAML comment preservation.
 
 _Maps to_: US8, US23, FR-019, FR-020, FR-031
 
