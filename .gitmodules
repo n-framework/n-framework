@@ -4,9 +4,9 @@
 [submodule "src/nfw"]
 	path = src/nfw
 	url = git@github.com:n-framework/nfw.git
-[submodule "src/nfw-templates"]
-	path = src/nfw-templates
-	url = git@github.com:n-framework/nfw-templates.git
+[submodule "src/nfw-generators"]
+	path = src/nfw-generators
+	url = git@github.com:n-framework/nfw-generators.git
 [submodule "src/core-cli-rust"]
 	path = src/core-cli-rust
 	url = git@github.com:n-framework/core-cli-rust.git
