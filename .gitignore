@@ -36,3 +36,4 @@ graphify-out/
 *.swp
 *.tmp
 Thumbs.db
+SmokeTestWorkspace/

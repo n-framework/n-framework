@@ -1,4 +1,0 @@
-<Solution>
-	<Project Path="src/core/TestService.Core.Domain/TestService.Core.Domain.csproj" />
-	<Project Path="src/core/TestService.Core.Application/TestService.Core.Application.csproj" />
-</Solution>
