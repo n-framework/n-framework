@@ -102,7 +102,7 @@ _Maps to_: US3, FR-007, FR-014
 
 ### P3-T007
 
-- [ ] Create spec topic in `src/nfw/specs/` with spec instruction: Implement the `nfw check` command that validates workspace architecture rules by scanning for forbidden dependencies, namespace violations, and banned packages; exit with non-zero status when violations found; provide actionable error messages; support `--ci` and `--verbose` flags; complete in <2 seconds; include integration tests.
+- [x] Create spec topic in `src/nfw/specs/` with spec instruction: Implement the `nfw check` command that validates workspace architecture rules by scanning for forbidden dependencies, namespace violations, and banned packages; exit with non-zero status when violations found; provide actionable error messages; support `--ci` and `--verbose` flags; complete in <2 seconds; include integration tests.
 
 _Maps to_: US5, FR-023, FR-024
 
