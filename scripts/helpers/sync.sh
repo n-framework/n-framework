@@ -14,13 +14,13 @@ sync_acore_scripts() {
 	local acore_full="${REPO_ROOT}/${acore_path}"
 
 	if [ ! -e "$acore_full/.git" ] && [ ! -f "$acore_full/.git" ]; then
-		acore_log_section "📦 Adding acore-scripts submodule..."
-		git -C "$REPO_ROOT" submodule add git@github.com:ahmet-cetinkaya/acore-scripts.git "$acore_path"
-	fi
-
-	if git -C "$REPO_ROOT" submodule status "$acore_path" 2> /dev/null | grep -q '^[-]'; then
-		acore_log_section "📦 Initializing acore-scripts submodule..."
-		git -C "$REPO_ROOT" submodule update --init "$acore_path"
+		if git -C "$REPO_ROOT" config --file .gitmodules --get "submodule.${acore_path}.path" &> /dev/null; then
+			acore_log_section "📦 Initializing acore-scripts submodule..."
+			git -C "$REPO_ROOT" submodule update --init "$acore_path"
+		else
+			acore_log_section "📦 Adding acore-scripts submodule..."
+			git -C "$REPO_ROOT" submodule add git@github.com:ahmet-cetinkaya/acore-scripts.git "$acore_path"
+		fi
 	else
 		acore_log_success "✅ acore-scripts submodule ready."
 	fi
@@ -32,16 +32,24 @@ sync_project_acore_scripts() {
 	local acore_path="packages/acore-scripts"
 	local acore_full="${project}${acore_path}"
 
-	if [ ! -e "$acore_full/.git" ] && [ ! -f "$acore_full/.git" ]; then
-		acore_log_info "📦 Adding acore-scripts to ${name}..."
-		git -C "$project" submodule add git@github.com:ahmet-cetinkaya/acore-scripts.git "$acore_path"
+	# Already a working submodule (has .git file or directory).
+	if [ -e "$acore_full/.git" ] || [ -f "$acore_full/.git" ]; then
+		acore_log_success "✅ acore-scripts ready in ${name}."
+		return 0
 	fi
 
-	if git -C "$project" submodule status "$acore_path" 2> /dev/null | grep -q '^[-]'; then
+	# Directory exists with files but is not a submodule — skip.
+	if [ -d "$acore_full" ] && [ "$(ls -A "$acore_full" 2> /dev/null)" ]; then
+		acore_log_success "✅ acore-scripts ready in ${name}."
+		return 0
+	fi
+
+	if git -C "$project" config --file .gitmodules --get "submodule.${acore_path}.path" &> /dev/null; then
 		acore_log_info "📦 Initializing acore-scripts in ${name}..."
 		git -C "$project" submodule update --init "$acore_path"
 	else
-		acore_log_success "✅ acore-scripts ready in ${name}."
+		acore_log_info "📦 Adding acore-scripts to ${name}..."
+		git -C "$project" submodule add git@github.com:ahmet-cetinkaya/acore-scripts.git "$acore_path"
 	fi
 }
 

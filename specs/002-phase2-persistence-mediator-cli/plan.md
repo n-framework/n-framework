@@ -87,52 +87,52 @@ src/nfw/  (already exists - Rust CLI with Handlebars templates)
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
 ### I. Single-Step Build And Test
 
-| Requirement | Status | Notes |
-|------------|--------|-------|
-| System builds with single command | ✅ PASS | Framework packages use standard `.csproj` build; CLI uses `cargo build` |
+| Requirement                              | Status  | Notes                                                                             |
+| ---------------------------------------- | ------- | --------------------------------------------------------------------------------- |
+| System builds with single command        | ✅ PASS | Framework packages use standard `.csproj` build; CLI uses `cargo build`           |
 | Full test suite runs with single command | ✅ PASS | `dotnet test` for packages; `cargo test` for CLI; root-level orchestration script |
-| Commands documented from repo root | ✅ PASS | PRD defines `make build` and `make test` conventions |
+| Commands documented from repo root       | ✅ PASS | PRD defines `make build` and `make test` conventions                              |
 
 ### II. CLI I/O And Exit Codes
 
-| Requirement | Status | Notes |
-|------------|--------|-------|
-| Normal output to stdout | ✅ PASS | Specified in PRD CLI requirements |
-| Diagnostics/errors to stderr | ✅ PASS | Standard Rust/CLI conventions |
+| Requirement                  | Status  | Notes                                        |
+| ---------------------------- | ------- | -------------------------------------------- |
+| Normal output to stdout      | ✅ PASS | Specified in PRD CLI requirements            |
+| Diagnostics/errors to stderr | ✅ PASS | Standard Rust/CLI conventions                |
 | Stable exit codes documented | ✅ PASS | Success (0), errors (non-zero), SIGINT (130) |
 
 ### III. No Suppression
 
-| Requirement | Status | Notes |
-|------------|--------|-------|
-| No suppressing compiler warnings | ✅ PASS | SC-001/SC-002 require zero AOT/trimming warnings |
-| No skipping/disabling failing tests | ✅ PASS | Test fixtures defined in FR-026 |
-| No swallowing exceptions | ✅ PASS | FR-003/FR-021 require explicit error handling patterns |
+| Requirement                         | Status  | Notes                                                  |
+| ----------------------------------- | ------- | ------------------------------------------------------ |
+| No suppressing compiler warnings    | ✅ PASS | SC-001/SC-002 require zero AOT/trimming warnings       |
+| No skipping/disabling failing tests | ✅ PASS | Test fixtures defined in FR-026                        |
+| No swallowing exceptions            | ✅ PASS | FR-003/FR-021 require explicit error handling patterns |
 
 ### IV. Deterministic Tests
 
-| Requirement | Status | Notes |
-|------------|--------|-------|
-| Unit tests avoid real network | ✅ PASS | FR-026 specifies build fixtures (no external deps) |
-| Integration tests isolated/labeled | ✅ PASS | Golden-file testing for generated code |
+| Requirement                        | Status  | Notes                                              |
+| ---------------------------------- | ------- | -------------------------------------------------- |
+| Unit tests avoid real network      | ✅ PASS | FR-026 specifies build fixtures (no external deps) |
+| Integration tests isolated/labeled | ✅ PASS | Golden-file testing for generated code             |
 
 ### V. Documentation Is Part Of Delivery
 
-| Requirement | Status | Notes |
-|------------|--------|-------|
+| Requirement                        | Status  | Notes                                                |
+| ---------------------------------- | ------- | ---------------------------------------------------- |
 | CLI quickstarts for build/run/test | ✅ PASS | FR-027/FR-028 require documented build/test commands |
-| No contradictory guidance | ✅ PASS | Spec-driven development ensures consistency |
+| No contradictory guidance          | ✅ PASS | Spec-driven development ensures consistency          |
 
 ### Additional Constraints
 
-| Requirement | Status | Notes |
-|------------|--------|-------|
-| Preserves repository conventions | ✅ PASS | Builds on Phase 1 workspace structure; extends existing CLI patterns |
-| Measurable outcomes validated | ✅ PASS | SC-001 through SC-010 all measurable; plan includes validation approach |
+| Requirement                      | Status  | Notes                                                                   |
+| -------------------------------- | ------- | ----------------------------------------------------------------------- |
+| Preserves repository conventions | ✅ PASS | Builds on Phase 1 workspace structure; extends existing CLI patterns    |
+| Measurable outcomes validated    | ✅ PASS | SC-001 through SC-010 all measurable; plan includes validation approach |
 
 **Overall Gate Status**: ✅ ALL GATES PASS - Proceed to implementation
 
@@ -142,8 +142,7 @@ This is an **orchestrator specification** coordinating work across multiple topi
 
 ### Documentation (this feature)
 
-```text
-specs/002-phase2-persistence-mediator-cli/
+```specs/002-phase2-persistence-mediator-cli/
 ├── spec.md              # Feature specification (user stories, requirements, success criteria)
 ├── plan.md              # This file (orchestrator view and technical approach)
 └── tasks.md             # Downstream package specifications (P1-P3)
@@ -153,8 +152,7 @@ specs/002-phase2-persistence-mediator-cli/
 
 The meta-repo orchestrates but does not directly implement Phase 2 features. Implementation occurs in downstream submodules:
 
-```text
-# Phase 2 Package Specifications (created via tasks.md)
+```# Phase 2 Package Specifications (created via tasks.md)
 src/core-persistence-dotnet/specs/
 ├── 001-entity-repository-abstractions/  # Entity and repository abstractions
 ├── 002-efcore-implementation/            # EF Core repository implementation
@@ -174,8 +172,7 @@ src/nfw/specs/
 
 ## Package Dependencies
 
-```text
-P1: core-persistence-dotnet (foundational)
+```P1: core-persistence-dotnet (foundational)
   ↓
 P2: core-mediator-dotnet (depends on Persistence; uses martinothamar/Mediator)
   ↓

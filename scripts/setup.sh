@@ -48,7 +48,7 @@ sync_scripts
 ensure_project_makefiles
 
 # Special improvement for dotnet-service template .editorconfig
-cp "${REPO_ROOT}/.editorconfig" "${REPO_ROOT}/src/nfw-templates/src/dotnet-service/service/content/.editorconfig"
+cp "${REPO_ROOT}/.editorconfig" "${REPO_ROOT}/src/nfw-generators/src/dotnet-service/service/content/.editorconfig"
 acore_log_success "✅ .editorconfig improved for dotnet-service template"
 
 acore_log_success "✨ Dev environment ready!"

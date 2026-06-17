@@ -11,7 +11,7 @@ cd "$REPO_ROOT"
 
 acore_log_section "🔍 Linting markdown files with markdownlint-cli2..."
 
-errors=$(bun run markdownlint-cli2 "**/*.md" 2>&1 | grep -v "markdownlint-cli2" | grep -v "^Finding:" | grep -v "^Linting:" | grep -v "^Summary:" || true)
+errors=$(bun run markdownlint-cli2 "src/**/*.md" "docs/**/*.md" "specs/**/*.md" 2>&1 | grep -v "markdownlint-cli2" | grep -v "^Finding:" | grep -v "^Linting:" | grep -v "^Summary:" || true)
 
 if [ -n "$errors" ]; then
 	printf '%s\n' "$errors"

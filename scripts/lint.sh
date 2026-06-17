@@ -9,8 +9,6 @@ source "${SCRIPT_DIR}/../packages/acore-scripts/src/logger.sh"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 cd "$REPO_ROOT"
 
-acore_log_info "Running lint for all projects..."
-
 for helper_lint in "${SCRIPT_DIR}/helpers"/*/lint.sh; do
 	[ -f "$helper_lint" ] || continue
 	bash "$helper_lint"
@@ -19,8 +17,7 @@ done
 for project_lint in "${REPO_ROOT}"/src/*/scripts/lint.sh; do
 	[ -f "$project_lint" ] || continue
 	project_name="$(basename "$(dirname "$(dirname "$project_lint")")")"
-	acore_log_divider
-	acore_log_info "▶️ Running lint in src/$project_name..."
+	acore_log_header "▶️ Running lint in src/$project_name..."
 	bash "$project_lint"
 done
 

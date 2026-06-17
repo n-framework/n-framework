@@ -179,16 +179,14 @@ Each user story should include:
 
 ### Given/When/Then Format
 
-```text
-**Given** <precondition - the starting state>,
+```**Given** <precondition - the starting state>,
 **When** <action - what the user does>,
 **Then** <expected outcome - what should happen>
 ```
 
 Example:
 
-```text
-**Given** the nfw CLI is installed,
+```**Given** the nfw CLI is installed,
 **When** I run `nfw --help`,
 **Then** I see a help screen displaying available commands and usage information
 ```

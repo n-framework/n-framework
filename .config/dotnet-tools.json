@@ -3,18 +3,24 @@
   "isRoot": true,
   "tools": {
     "csharpier": {
-      "version": "1.2.6",
-      "commands": ["csharpier"],
+      "version": "1.3.0",
+      "commands": [
+        "csharpier"
+      ],
       "rollForward": false
     },
     "roslynator.dotnet.cli": {
       "version": "0.12.0",
-      "commands": ["roslynator"],
+      "commands": [
+        "roslynator"
+      ],
       "rollForward": false
     },
     "dotnet-outdated-tool": {
-      "version": "4.7.1",
-      "commands": ["dotnet-outdated"],
+      "version": "4.8.1",
+      "commands": [
+        "dotnet-outdated"
+      ],
       "rollForward": false
     }
   }

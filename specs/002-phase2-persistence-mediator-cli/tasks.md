@@ -96,7 +96,7 @@ _Maps to_: US3, FR-007, FR-019
 
 ### P3-T006
 
-- [ ] Create spec topic in `src/nfw/specs/` with spec instruction: Implement the `nfw gen crud <NAME> --props <DEFINITIONS>` command that generates complete CRUD scaffolding by orchestrating entity, repository, commands, queries, handlers, DTOs, and API endpoints; support `--id-type` parameter; create feature folder structure automatically; generate all required files in correct layers; validate generated code compiles as a unit; complete in <10 seconds; include integration tests for full CRUD flow.
+- [x] Create spec topic in `src/nfw/specs/` with spec instruction: Implement the `nfw gen crud <NAME> --props <DEFINITIONS>` command that generates complete CRUD scaffolding by orchestrating entity, repository, commands, queries, handlers, DTOs, and API endpoints; support `--id-type` parameter; create feature folder structure automatically; generate all required files in correct layers; validate generated code compiles as a unit; complete in <10 seconds; include integration tests for full CRUD flow.
 
 _Maps to_: US3, FR-007, FR-014
 
@@ -128,8 +128,7 @@ _Maps to_: US8, US23, FR-019, FR-020, FR-031
 
 ## Package Dependencies
 
-```text
-P1: core-mediator-dotnet (foundational CQRS)
+```P1: core-mediator-dotnet (foundational CQRS)
   ↓
 P2: core-persistence-dotnet (depends on Mediator abstractions)
   ↓
@@ -189,8 +188,7 @@ Each package is independently testable and releasable:
 
 The CRUD command (P3-T006) orchestrates the granular commands:
 
-```
-P3-T003 (add entity)     → Entity class generation
+```P3-T003 (add entity)     → Entity class generation
 P3-T004 (add repository) → Repository interface generation
 P3-T001 (add command)    → Create/Update/Delete commands
 P3-T002 (add query)      → GetById/GetAll queries
